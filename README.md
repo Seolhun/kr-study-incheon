@@ -38,7 +38,7 @@
 
 9. Github 가서 확인하기
 	- [Go to This Repository on GitHub](https://github.com/Seolhun/kr-study-incheon.git)
-	> <img width="900" height="500" src="readme-image/github-test.png"/>
+	> <img width="900" height="400" src="readme-image/github-test.png"/>
 
 	- 해당 branch 버튼 클릭해서 자신의 branch 들어가기
 	- 자신의 원하는 데로 들어갔는지 확인해보기. 
