@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>v-for 'in' Syntax</h3>
+                <ul>
+                    <li v-for="(item, index) in items">
+                        {{ parentMessage }} - {{ index }} - {{ item.message }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>v-for 'of' Syntax</h3>
+                <ul>
+                    <li v-for="(item, index) in items">
+                        {{ index }} - {{ item.message }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Render object fields - value, key</h3>
+                <ul>
+                    <li v-for="(value, key) in object">
+                        {{ key }} - {{ value }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Object Change Detection Caveats</h3>
+                <div>
+                    {{ userProfile }}
+                </div>
+                <button
+                        class="btn btn-primary"
+                        @click="setMethod1"
+                >
+                    Put Value
+                </button>
+
+                <button
+                        class="btn btn-primary"
+                        @click="setMethod2"
+                >
+                    Assign Object
+                </button>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Displaying Filtered/Sorted Results</h3>
+                <li v-for="n in evenNumbers">
+                    {{ n }}
+                </li>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>v-for - v-if with</h3>
+                <li
+                        v-for="item in items"
+                        v-if="item.isActive"
+                >
+                    {{ item }}
+                </li>
+                <p v-else>
+                    No todos left!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <h1>Another Instance</h1>
+    <div id="item-list">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>v-for with Component</h3>
+                <input
+                        v-model="newItemText"
+                        @keyup.enter="addNewItem"
+                        placeholder="Add a item"
+                >
+                <ul>
+                    <li
+                            is="item-list"
+                            v-for="(item, index) in items"
+                            :key="item.id"
+                            :name="item.name"
+                            @remove="items.splice(index, 1)"
+                    >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	// Global Componenet
+	Vue.component('item-list', {
+		template: '\
+            <li>\
+              {{ name }}\
+              <button class="btn btn-danger" \
+                @click="$emit(\'remove\')"> \
+                    X \
+              </button>\
+            </li>'
+		,
+		props: ['name']
+	})
+	const itemModule = new Vue({
+		el: '#item-list',
+		data: {
+			newItemText: '',
+			items: [
+				{
+					id: 1,
+					name: 'Chair',
+				},
+				{
+					id: 2,
+					name: 'Desk',
+				},
+				{
+					id: 3,
+					name: 'Coffe'
+				}
+			],
+			nextItemId: 4
+		},
+		methods: {
+			addNewItem: function () {
+				this.items.push({
+					id: this.nextItemId++,
+					name: this.newItemText
+				})
+				this.newItemText = ''
+			}
+		}
+	})
+
+	const app = new Vue({
+		el: '#app',
+		data: {
+			parentMessage: 'Parent',
+			items: [
+				{message: 'Foo', isActive: false},
+				{message: 'Cli', isActive: true},
+				{message: 'Vue', isActive: true}
+			],
+			object: {
+				firstName: 'John',
+				lastName: 'Doe',
+				age: 30
+			},
+			userProfile: {
+				name: 'SeolHun'
+			},
+			numbers: [1, 2, 3, 4, 5]
+		},
+		computed: {
+			evenNumbers: function () {
+				return this.numbers.filter(function (number) {
+					return number % 2 === 0
+				})
+			}
+		},
+		methods: {
+			setMethod1: () => {
+				Vue.set(app.userProfile, 'age', 28)
+			},
+			setMethod2: () => {
+				app.userProfile = Object.assign({}, this.userProfile, {
+					age: 27,
+					favoriteColor: 'Vue Green'
+				})
+			}
+		},
+		watch: {}
+	});
+</script>
+<style>
+
+</style>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+
+    <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <h1>How to use 'Computed Method vs Methods'</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>{{ now }}</h1>
+        </div>
+    </div>
+
+    <hr>
+    <h1>How to use 'watch'</h1>
+    <div id="watch-example">
+        <p>
+            yes/no 질문을 물어보세요:
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+</div>
+
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	const vm = new Vue({
+		el: '#app',
+		data: {
+			question: '',
+			answer: ''
+		},
+		computed: {
+			now: function () {
+				return Date.now()
+			}
+		},
+		methods: {
+			getAnswer: _.debounce(
+				function () {
+					if (this.question.indexOf('?') === -1) {
+						this.answer = 'Questions usually contain a question mark. ;-)'
+						return
+					}
+					this.answer = 'Thinking...'
+					let vm = this
+                    vm.answer = 'The question is right. Answer is updated'
+				},
+				// 사용자가 입력을 기다리는 시간(밀리세컨드) 입니다.
+				500
+			)
+		},
+		watch: {
+			question: function (newQuestion) {
+				this.answer = 'Waiting for you to stop typing...'
+				this.getAnswer()
+			}
+		}
+	});
+</script>
+<style>
+
+</style>
+</html>

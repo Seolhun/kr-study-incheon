@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <!-- if and Else-if and Else -->
+    <h1>How to use 'Condition syntax'</h1>
+    <div class="row">
+        <div class="col-sm-12 text-success"
+             v-if="condition"
+        >
+            <h3>{{ trueResult }}</h3>
+        </div>
+        <div class="col-sm-12 text-danger"
+             v-else
+        >
+            <h3>{{ falseResult }}</h3>
+        </div>
+
+        <div class="col-sm-12">
+            <button
+                    class="btn btn-info"
+                    @click="changeCondition">
+                Change
+            </button>
+        </div>
+    </div>
+
+    <hr>
+    <h1>Control using 'Key'</h1>
+    <!-- Control using 'Key' -->
+    <div class="row">
+        <div class="col-sm-12">
+            <p>{{ loginType }}</p>
+            <template v-if="loginType === 'username'">
+                <label>사용자 이름</label>
+                <input placeholder="사용자 이름을 입력하세요">
+            </template>
+            <template v-else>
+                <label>이메일</label>
+                <input placeholder="이메일 주소를 입력하세요">
+            </template>
+        </div>
+
+        <div class="col-sm-12">
+            <button
+                    class="btn btn-info"
+                    @click="changeLoginType">
+                Change loginType
+            </button>
+        </div>
+    </div>
+
+    <hr>
+    <h1>v-show vs v-if</h1>
+    <!-- Control using 'Key' -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12 text-success"
+                 v-show="condition"
+            >
+                <h3>{{ trueResult }}</h3>
+            </div>
+            <div class="col-sm-12 text-success"
+                 v-show="!condition"
+            >
+                <h5>Search v-show element using Browser dev tools. can find it.</h5>
+            </div>
+            <hr>
+            <div class="col-sm-12 text-danger"
+                 v-if="condition"
+            >
+                <h3>{{ falseResult }}</h3>
+            </div>
+            <div class="col-sm-12 text-danger"
+                 v-if="!condition"
+            >
+                <h5>Search v-if element using Browser dev tools. never find it.</h5>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button
+                    class="btn btn-info"
+                    @click="changeCondition">
+                Change
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			condition: true,
+			trueResult: 'You can see me When condition is "true"',
+			falseResult: 'You can see me When condition is "false"',
+			loginType: 'username'
+		},
+		computed: {},
+		methods: {
+			changeCondition () {
+				this.condition = !this.condition
+			},
+			changeLoginType () {
+				if (this.loginType === 'username') {
+					this.loginType = 'email'
+				} else {
+					this.loginType = 'username'
+				}
+			}
+		},
+		watch: {},
+		beforeCreate: function () {
+			console.log('beforeCreate');
+		},
+		create: function () {
+			console.log('create');
+		},
+		beforeMount: function () {
+			console.log('beforeMount');
+		},
+		mounted: function () {
+			console.log('mounted');
+		},
+		beforeUpdate: function () {
+			console.log('beforeUpdate');
+		},
+		updated: function () {
+			console.log('updated');
+		},
+		beforeDestroy: function () {
+			console.log('beforeDestroy');
+		},
+		destroyed: function () {
+			console.log('destroyed');
+		}
+	});
+</script>
+<style>
+
+</style>
+</html>

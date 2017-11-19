@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>
+                Method Event Handlers
+            </h3>
+            {{ counter }} is clicked
+
+            <button
+                    class="btn btn-primary"
+                    @click="increment"
+            >
+                Increment
+            </button>
+            <button
+                    class="btn btn-danger"
+                    @click="decrement"
+            >
+                Decrement
+            </button>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>
+                Method In Inline Handlers
+            </h3>
+            <button
+                    class="btn btn-warning"
+                    @click="warn('Hello, This is warn', $event)"
+            >
+                Warning
+            </button>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>
+                Key Modifiers
+            </h3>
+            <ul v-for="code in keyCodes">
+                <li>{{ code }}</li>
+            </ul>
+            <input
+                    class="form-control-lg"
+                    @keyup.enter="warn('enter')"
+                    @keyup.tab="warn('Tab')"
+                    @keyup.esc="warn('esc')"
+                    @keyup.right="warn('Right')"
+                    @keyup.left="warn('Left')"
+                    @keyup.up="warn('Up')"
+                    @keyup.down="warn('Down')"
+                    @keyup.delete="warn('Delete')"
+                    @keyup.space="warn('Space')"
+            >
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>
+                System Modifiers Keys
+            </h3>
+            <ul v-for="code in sysCodes">
+                <li>{{ code }}</li>
+            </ul>
+            <button
+                    class="btn btn-primary"
+                    @click.ctrl="warn('ctrl')"
+                    @click.alt="warn('alt')"
+                    @click.meta="warn('meta')"
+            >
+                Sys KeyCode Test
+            </button>
+            <!-- Alt + C -->
+            <input
+                    v-model="testKeyInput"
+                    @keyup.alt.67="clear"
+            >
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	const app = new Vue({
+		el: '#app',
+		data: {
+			counter: 0,
+			keyCodes: [
+				'Enter',
+				'Tab',
+				'Delete (“Delete” 와 “Backspace” 키 모두를 캡처합니다)',
+				'Esc',
+				'Space',
+				'Up',
+				'Down',
+				'Left',
+				'Right'
+			],
+			sysCodes: [
+				'Ctrl',
+				'Alt',
+				'Shift',
+				'Meta (Mac : Command Key , Window : Windows Key)'
+			],
+			mouseCodes: [
+				'Left',
+				'Right',
+				'middle'
+			],
+			testKeyInput: 'Push Alt + C to clear'
+		},
+		methods: {
+			increment: () => {
+				app.counter += 1;
+			},
+			decrement: () => {
+				app.counter -= 1;
+			},
+			warn: (message, event) => {
+				// 이제 네이티브 이벤트에 액세스 할 수 있습니다
+				if (event) event.preventDefault()
+				alert(message)
+			},
+            clear: () => {
+				app.testKeyInput = ''
+            }
+		},
+		computed: {},
+		watch: {}
+	});
+</script>
+<style>
+
+</style>
+</html>

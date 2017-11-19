@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <h1>Binding Classes</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="static"
+                 v-bind:class="{ active: isActive, 'text-danger': hasError }">
+                <h3>Hello, Binding Classes 1</h3>
+            </div>
+
+            <div v-bind:class="classObject">
+                <h3>Hello, Binding Classes 2</h3>
+            </div>
+
+            <div v-bind:class="[activeClass, successClass]">
+                <h3>Hello, Binding Classes 3</h3>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h1>Binding Classes using Components</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <my-component
+                    v-bind:class="classObject"
+                    :message="message"
+                    :name="name"
+            >
+            </my-component>
+        </div>
+    </div>
+    <hr>
+    <h1>Binding Styles</h1>
+    <div v-bind:style="styleObject">
+        <p>Hello, Binding Styles</p>
+    </div>
+</div>
+
+<hr>
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	Vue.component('my-component', {
+		props: ['message', 'name'],
+		template: '<div class="text-info"><h3>{{ message }}, {{ name }}</h3></div>',
+	})
+
+	new Vue({
+		el: '#app',
+		data: {
+			isActive: true,
+			hasError: false,
+			classObject: {
+				active: true,
+				'text-right': true
+			},
+			activeClass: 'active',
+			successClass: 'text-success',
+			message: 'Hello',
+			name: 'Vue Study',
+			styleObject: {
+				color: 'red',
+				fontSize: '25px'
+
+			}
+		},
+		computed: {},
+		methods: {},
+		watch: {}
+	});
+</script>
+<style>
+
+</style>
+</html>
