@@ -8,7 +8,7 @@ html 엘리먼트를 확장하여 캡슐화
 자식 컴포넌트는 부모 컴포넌트에게 **emit 으로 이벤트**를 보내 상호작용을 한다.
 비 부모-자식 (sibling or any) 컴포넌트의 경우는 **더미 vue 인스턴스를 event bus** 로 사용하여 **\$emit 하고, \$on** 하여 사용할 수 있다.
 
-<img src="https://joshua1988.github.io/images/posts/web/vuejs/components.png" width="250px"/>  <img src="https://kr.vuejs.org/images/props-events.png" width="250px"/><img src="https://ob6mci30g.qnssl.com/Blog/ArticleImage/51_12.png" width="250px">
+<img src="https://joshua1988.github.io/images/posts/web/vuejs/components.png" width="250px"/>  <img src="https://kr.vuejs.org/images/props-events.png" width="250px"/>   <img src="https://ob6mci30g.qnssl.com/Blog/ArticleImage/51_12.png" width="250px">
 
 #### 전역 컴포넌트를 등록
 
@@ -39,12 +39,10 @@ html 엘리먼트를 확장하여 캡슐화
 > ```
 
 - 컴포넌트의 `data` 속성은 꼭 함수로 작성해야한다. 
-
   - 또한 함수에서 새로운 객체를 반환하여야 한다.  
-
   - 일반 전역 데이터 객체를 넘겨 공유하면 모든 컴포넌트가 데이터를 공유하게 된다. 
-
-  - > ```
+  - > ```html
+    > <script>
     > // 오류
     > Vue.component('my-component', {
     >   data: {
@@ -64,23 +62,20 @@ html 엘리먼트를 확장하여 캡슐화
     >   //   }
     >   // }
     > })
+    > </sciprt>
     > ```
 
 - Vue 인스턴스를 생성하기전에 꼭 Component 부터 등록!
-
 - tagName 은 kebab-case 로 사용을 권장한다. 그렇지 않았더라도 HTML 은 kebab-case (lowercase hyphen 표기법) 을 사용해야한다. (html property, attribute, tag.. )
-
 - template 의 root 요소는 하나여야 한다. 
-
 - template 표기방법
-
-  - 인라인  표기 (component 등록시에 template 문자열 지정 )  // 비추
+  - 인라인 표기 (component 등록시에 template 문자열 지정 )  // 비추
   - inline-template (component 사용시에 내부에서 바로 사용 - inline-template 명시) // 비추
-  - <template> 태그 (.vue 파일에서 주로 사용)
-  - <script type="text/x-template" id="templateId">   // 비추
+  - \<template> 태그 (.vue 파일에서 주로 사용)
+  - \<script type="text/x-template" id="templateId">   // 비추
 
 - 렌더링 
-  > ```
+  > ```html
   > <div id="example">
   >   <div>사용자 정의 컴포넌트 입니다!</div>
   > </div>
@@ -88,7 +83,8 @@ html 엘리먼트를 확장하여 캡슐화
 
 #### 지역 컴포넌트 등록
 
-> ```
+> ```html
+> <script>
 > var Child = {
 >   template: '<div>사용자 정의 컴포넌트 입니다!</div>'
 > }
@@ -100,6 +96,7 @@ html 엘리먼트를 확장하여 캡슐화
 >     'my-component': Child
 >   }
 > })
+> </script>
 > ```
 
 - 지역 컴포넌트 등록은 array [ ... ] 로도 가능하다 
@@ -113,10 +110,9 @@ html 엘리먼트를 확장하여 캡슐화
 - 사용할때는 import 해서 사용함. 
 - vetur 에서 scaffold 로 Snippet 할 수 있음
 
+- \.vue 파일
 
-- .vue 파일
-
-  > ```
+  > ```html
   > <template>	// id 부여하지 않음
   >   <div>
   >     component test-son1<br/>
@@ -145,31 +141,28 @@ html 엘리먼트를 확장하여 캡슐화
 
 #### DOM template 제한 사항 및 해결책
 
-> ```
+> ```html
 > <!-- 문제 : <table> 은 하위에 가질 수 있는 element 가 제한이 있다 -->
 > <table>
 >   <my-row>...</my-row>
 > </table>
 > ```
 
-> ```
+> ```html
 > <!-- is 특수 속성 사용 -->
 > <table>
 >   <tr is="my-row"></tr>
 > </table>
 > ```
 
-> **다음 소스 중 하나에 포함되면 문자열 템플릿을 사용하는 경우에는 이러한 제한 사항이 적용되지 않습니다.**:
->
-> - `<script type="text/x-template">`
-> - JavaScript 인라인 템플릿 문자열
-> - `.vue` 컴포넌트 (단일파일 컴포넌트)
->
-> 따라서 가능한 경우 항상 문자열 템플릿을 사용하는 것이 좋습니다.
->
-> - <template> 를 사용할때는 is 특수 속성을 사용해야한다. 
+**다음 소스 중 하나에 포함되면 문자열 템플릿을 사용하는 경우에는 이러한 제한 사항이 적용되지 않습니다.**:
 
+- \<script type="text/x-template">
+- JavaScript 인라인 템플릿 문자열
+- \.vue 컴포넌트 (단일파일 컴포넌트)
+- \<template> 를 사용할때는 is 특수 속성을 사용해야한다. 
 
+따라서 가능한 경우 항상 문자열 템플릿을 사용하는 것이 좋습니다.
 
 # 2. Props  
 
@@ -177,12 +170,16 @@ html 엘리먼트를 확장하여 캡슐화
 
 - 컴포넌트 정의할때 props 지정
 
+> ```html
+> <script>
 > Vue.component('child', {  
 > // props 정의  
 > ***props: ['MyMessage'],***
 > // 데이터와 마찬가지로 prop은 템플릿 내부에서 사용할 수 있으며  
 > // vm의 this.MyMessage로 사용할 수 있습니다.  
 > template: '<span>{{ MyMessage}}</span>'})
+</script>
+> ```
 
 - 컴포넌트 사용할때 props 전달
 
@@ -194,13 +191,15 @@ html 엘리먼트를 확장하여 캡슐화
 
 - v-bind 을 이용한 객체 Props 바인딩
 
-> ```todo: {  text: 'Learn Vue',  isComplete: false}```
->
+> ```html
+> todo: {  text: 'Learn Vue',  isComplete: false}
 > ```
+>
+> ```html
 > <todo-item v-bind="todo"></todo-item>
 > ```
 > 아래와 같다.
-> ```
+> ```html
 > <todo-item
 >   v-bind:text="todo.text"
 >   v-bind:is-complete="todo.isComplete"
@@ -223,7 +222,7 @@ html 엘리먼트를 확장하여 캡슐화
 
 - 컴포넌트는 자신의 props 의 요구사항을 지정하여 검증할 수 있고, 요구사항이 충족되지 않으면 워닝이 나온다. 이때는 props 를 배열이 아닌 객체 타입으로 사용한다. 
 
-  > ```
+  > ```html
   > Vue.component('example', {
   >   props: {
   >     // 기본 타입 확인 (`null` 은 어떤 타입이든 가능하다는 뜻입니다)
@@ -295,7 +294,7 @@ html 엘리먼트를 확장하여 캡슐화
     - 구별하고자 하면 v-on:click.native="xxx" 처럼 native 수식어를 붙여준다. 
 
 
-  - > ```
+  - > ```html
     > <div id="counter-event-example">
     >   <p>{{ total }}</p>
     >   <button-counter v-on:increment="incrementTotal"></button-counter>
@@ -304,7 +303,7 @@ html 엘리먼트를 확장하여 캡슐화
     > ```
     >
 
-- > ```
+- > ```html
   > Vue.component('button-counter', {
   >   template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
   >   data: function () {
@@ -344,7 +343,7 @@ html 엘리먼트를 확장하여 캡슐화
 
   - checkbox 등의 특수 타입 입력 컴포넌트를 위해 v-model 을 커스텀할 수 있다. 
 
-    - > ```
+    - > ```html
       > Vue.component('my-checkbox', {
       >   model: {
       >     prop: 'checked',
@@ -367,7 +366,7 @@ html 엘리먼트를 확장하여 캡슐화
       >
       > 아래와 같습니다
       >
-      > ```
+      > ```html
       > <my-checkbox
       >   :checked="foo"
       >   @change="val => { foo = val }"
@@ -402,7 +401,7 @@ html 엘리먼트를 확장하여 캡슐화
     >
     > prop을 컴포넌트에게 전달하는 것처럼, 하위 컴포넌트에서 단순히 데이터를 슬롯에 전달하면 됩니다.
     >
-    > ```
+    > ```html
     > <div class="child">
     >   <slot text="hello from child"></slot>
     > </div>
@@ -411,7 +410,7 @@ html 엘리먼트를 확장하여 캡슐화
     >
     > 부모에서, 특별한 속성 `scope-scope`를 가진 `<template>` 엘리먼트가 있어야 합니다. 이것은 범위를 가지는 슬롯을 위한 템플릿임을 나타냅니다. `slot-scope`의 값은 자식으로부터 전달 된 props 객체를 담고있는 임시 변수의 이름입니다:
     >
-    > ```
+    > ```html
     > <div class="parent">
     >   <child>
     >     <template slot-scope="props">
@@ -425,7 +424,7 @@ html 엘리먼트를 확장하여 캡슐화
     >
     > 위를 렌더링하면 출력은 다음과 같습니다.
     >
-    > ```
+    > ```html
     > <div class="parent">
     >   <div class="child">
     >     <span>hello from parent</span>
@@ -439,7 +438,7 @@ html 엘리먼트를 확장하여 캡슐화
     >
     > 범위가 지정된 슬롯의 보다 일반적인 사용 사례는 컴포넌트 사용자가 리스트의 각 항목을 렌더링하는 방법을 사용자 정의할 수 있는 리스트 컴포넌트입니다.
     >
-    > ```
+    > ```html
     > <my-awesome-list :items="items">
     >   <!-- scoped slot 역시 이름을 가질 수 있습니다 -->
     >   <li
@@ -454,7 +453,7 @@ html 엘리먼트를 확장하여 캡슐화
     >
     > 그리고 리스트 컴포넌트의 템플릿 :
     >
-    > ```
+    > ```html
     > <ul>
     >   <slot name="item"
     >     v-for="item in items"
@@ -475,7 +474,7 @@ html 엘리먼트를 확장하여 캡슐화
 
 - 컴포넌트를 이름으로 바꿔 넣을 수 있다. 
 
-  - >```
+  - >```html
     >var vm = new Vue({
     >  el: '#example',
     >  data: {
@@ -489,7 +488,7 @@ html 엘리먼트를 확장하여 캡슐화
     >})
     >```
     >
-    >```
+    >```html
     ><component v-bind:is="currentView">
     >  <!-- vm.currentView가 변경되면 컴포넌트가 변경됩니다! -->
     ></component>
@@ -497,7 +496,7 @@ html 엘리먼트를 확장하여 캡슐화
 
 - 이때 바뀌여서 없어지는 (비활성??) 컴포넌트를 캐시하기 위해서 <keep-alive> 를 사용할 수 있다. 
 
-  - > ```
+  - > ```html
     > <keep-alive>
     >   <component :is="currentView">
     >     <!-- 비활성화 된 컴포넌트는 캐시 됩니다! -->
@@ -514,13 +513,13 @@ html 엘리먼트를 확장하여 캡슐화
 
 - 자식 컴포넌트 참조 : ref 속성을 줘서 자식 직접 참조
 
-  - > ```
+  - > ```html
     > <div id="parent">
     >   <user-profile ref="profile"></user-profile>
     > </div>
     > ```
 
-  - > ```
+  - > ```html    
     > var parent = new Vue({ el: '#parent' })
     > // 자식 컴포넌트 인스턴스에 접근합니다.
     > var child = parent.$refs.profile
