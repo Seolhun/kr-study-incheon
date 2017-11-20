@@ -1,3 +1,13 @@
+# Vue Study In Incheon - Day 2.
+## Vue Component
+
+- Author : jhbaik
+- IDE : Visual Studio Code
+- Version : Vue 2.5.3
+- Started Date : 2017.11.19
+
+---
+
 # 1. 컴포넌트
 
 html 엘리먼트를 확장하여 캡슐화
