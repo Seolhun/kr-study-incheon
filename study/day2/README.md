@@ -10,7 +10,7 @@ html 엘리먼트를 확장하여 캡슐화
 
 <img src="https://joshua1988.github.io/images/posts/web/vuejs/components.png" width="250px"/>  <img src="https://kr.vuejs.org/images/props-events.png" width="250px"/><img src="https://ob6mci30g.qnssl.com/Blog/ArticleImage/51_12.png" width="250px">
 
-####전역 컴포넌트를 등록
+#### 전역 컴포넌트를 등록
 
 > ```html
 > <div id="example">
@@ -86,7 +86,7 @@ html 엘리먼트를 확장하여 캡슐화
   > </div>
   > ```
 
-####지역 컴포넌트 등록
+#### 지역 컴포넌트 등록
 
 > ```
 > var Child = {
@@ -105,7 +105,7 @@ html 엘리먼트를 확장하여 캡슐화
 - 지역 컴포넌트 등록은 array [ ... ] 로도 가능하다 
 
 
-####.vue 단일 파일 컴포넌트 - vue-loader 에 의해 파싱되어 지원되어진다. 
+#### \.vue 단일 파일 컴포넌트 - vue-loader 에 의해 파싱되어 지원되어진다. 
 
 - ES6 나 CSS 빌드 등을 지원하게 되며, 컴포넌트 단위로 분리, 관리할 수 있다. 템플릿도 깔끔하게 작성가능.
 - vue.component 하지 않음 (자동), 반드시 export 해야함. 
@@ -143,7 +143,7 @@ html 엘리먼트를 확장하여 캡슐화
   > </style>
   > ```
 
-####DOM template 제한 사항 및 해결책
+#### DOM template 제한 사항 및 해결책
 
 > ```
 > <!-- 문제 : <table> 은 하위에 가질 수 있는 element 가 제한이 있다 -->
