@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Getting started</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-1">
+                <h1>Example 1- CSS Transition</h1>
+                <button
+                        class="btn btn-primary"
+                        @click="show = !show"
+                >
+                    Toggle render
+                </button>
+                <transition name="slide-fade">
+                    <h2 v-if="show">hello</h2>
+                </transition>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-2">
+                <h1>Example 2 - CSS Animation</h1>
+                <button class="btn btn-primary"
+                        @click="show = !show"
+                >
+                    Toggle show
+                </button>
+                <transition
+                        name="bounce"
+                >
+                    <h2 v-if="show">Look at me!</h2>
+                </transition>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-3">
+                <h1>Example 3 - Animate CSS - Overwrite - Appear</h1>
+                <button
+                        class="btn btn-primary"
+                        @click="show = !show"
+                >
+                    Toggle render
+                </button>
+                <transition
+                        appear
+                        name="custom-classes-transition"
+                        enter-active-class="animated tada"
+                        leave-active-class="animated bounceOutRight"
+                >
+                    <h2 v-if="show">hello</h2>
+                </transition>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-4">
+                <h1>Example 4 - JavaScript Hook - Velocity</h1>
+                <button class="btn btn-primary"
+                        @click="show = !show"
+                        a>
+                    Toggle
+                </button>
+                <transition
+                        @before-enter="beforeEnter"
+                        @enter="enter"
+                        @after-enter="afterEnter"
+                        @enter-cancelled="enterCancelled"
+                        @before-leave="beforeLeave"
+                        @leave="leave"
+                        @after-leave="afterLeave"
+                        @leave-cancelled="leaveCancelled"
+                        :css="false"
+                >
+                    <h2 v-if="show">
+                        Demo
+                    </h2>
+                </transition>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-5">
+                <h1>Example 5 - transition-components-demo</h1>
+                <label>A
+                    <input
+                            type="radio"
+                            name="component"
+                            @click="changeView('v-a')"
+                    >
+                </label>
+                <label>B
+                    <input
+                            type="radio"
+                            name="component"
+                            @click="changeView('v-b')"
+                    >
+                </label>
+                <transition
+                        name="component-fade"
+                        mode="out-in"
+                >
+                    <component :is="view"></component>
+                </transition>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-6">
+                <h1>Example 6 - List Transition</h1>
+                <button
+                        class="btn btn-primary"
+                        @click="add"
+                >
+                    Add
+                </button>
+                <button
+                        class="btn btn-danger"
+                        @click="remove"
+                >
+                    Remove
+                </button>
+                <transition-group name="list" tag="h5">
+                        <span
+                                v-for="item in items"
+                                :key="item"
+                                class="list-item"
+                        >
+                          {{ item }}
+                        </span>
+                </transition-group>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="example-7">
+                <h1>Example 7 - List Movement Transition</h1>
+                <button
+                        class="btn btn-primary"
+                        @click="shuffle"
+                >
+                    Shuffle
+                </button>
+                <transition-group
+                        name="flip-list"
+                        tag="ul"
+                >
+                    <li v-for="item in items" :key="item">
+                        {{ item }}
+                    </li>
+                </transition-group>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Example 8 - Re-Usable Transition</h1>
+            <div id="example-8" class="demo">
+                Fade In: <input type="range" v-model="fadeInDuration" min="0" :max="maxFadeDuration">
+                Fade Out: <input type="range" v-model="fadeOutDuration" min="0" :max="maxFadeDuration">
+                <transition
+                        :css="false"
+                        @before-enter="beforeEnter"
+                        @enter="enter"
+                        @leave="leave"
+                >
+                    <p v-if="show">hello</p>
+                </transition>
+                <button
+                        class="btn btn-primary"
+                        v-if="stop"
+                        @click="stop = false; show = false"
+                >Start animating
+                </button>
+                <button
+                        class="btn btn-warning"
+                        v-else
+                        @click="stop = true"
+                >Stop it!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div style="text-align : center;">
+        <h4>Author : <a target="_blank" href="https://github.com/Seolhun">SeolHun </a></h4>
+    </div>
+</footer>
+
+</body>
+<script>
+	new Vue({
+		el: '#example-1',
+		data: {
+			show: true
+		}
+	})
+
+	new Vue({
+		el: '#example-2',
+		data: {
+			show: true
+		}
+	})
+
+	new Vue({
+		el: '#example-3',
+		data: {
+			show: true
+		}
+	})
+
+	new Vue({
+		el: '#example-4',
+		data: {
+			show: true
+		},
+		methods: {
+			// --------
+			// 진입
+			// --------
+			// 진입 전
+			beforeEnter: function (el) {
+				console.log("beforeEnter", el)
+				el.style.opacity = 0
+			},
+			// 진입 시
+			enter: function (el, done) {
+				console.log("enter", el)
+				Velocity(el, {opacity: 1, fontSize: '1.4em'}, {duration: 300})
+				Velocity(el, {fontSize: '1em'}, {complete: done})
+			},
+			// 진입 후
+			afterEnter: function (el) {
+				console.log("afterEnter", el)
+			},
+			enterCancelled: function (el) {
+				console.log("enterCancelled", el)
+			},
+
+			// --------
+			// 진출
+			// --------
+			// 진출 전
+			beforeLeave: function (el) {
+				console.log("beforeLeave", el)
+			},
+			// 진출 시
+			// done 콜백은 CSS와 함께 사용할 때 선택 사항입니다.
+			leave: function (el, done) {
+				console.log("leave", el)
+				Velocity(el, {translateX: '15px', rotateZ: '50deg'}, {duration: 600})
+				Velocity(el, {rotateZ: '100deg'}, {loop: 2})
+				Velocity(el, {
+					rotateZ: '45deg',
+					translateY: '30px',
+					translateX: '30px',
+					opacity: 0
+				}, {complete: done})
+			},
+			// 진출 후
+			afterLeave: function (el) {
+				console.log("afterLeave", el)
+			},
+			// leaveCancelled은 v-show와 함께 사용됩니다.
+			leaveCancelled: function (el) {
+				console.log("leaveCancelled", el)
+			}
+		}
+	})
+
+	new Vue({
+		el: '#example-5',
+		data: {
+			view: 'v-a'
+		},
+		components: {
+			'v-a': {
+				template: '<div>Component A</div>'
+			},
+			'v-b': {
+				template: '<div>Component B</div>'
+			}
+		},
+		methods: {
+			changeView: function (value) {
+				this.view = value
+			}
+		}
+	})
+
+	new Vue({
+		el: '#example-6',
+		data: {
+			items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+			nextNum: 10
+		},
+		methods: {
+			randomIndex: function () {
+				return Math.floor(Math.random() * this.items.length)
+			},
+			add: function () {
+				this.items.splice(this.randomIndex(), 0, this.nextNum++)
+			},
+			remove: function () {
+				this.items.splice(this.randomIndex(), 1)
+			},
+		}
+	})
+
+	new Vue({
+		el: '#example-7',
+		data: {
+			items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		},
+		methods: {
+			shuffle: function () {
+				this.items = _.shuffle(this.items)
+			}
+		}
+	})
+
+	new Vue({
+		el: '#example-8',
+		data: {
+			show: true,
+			fadeInDuration: 1000,
+			fadeOutDuration: 1000,
+			maxFadeDuration: 1500,
+			stop: true
+		},
+		mounted: function () {
+			this.show = false
+		},
+		methods: {
+			beforeEnter: function (el) {
+				el.style.opacity = 0
+			},
+			enter: function (el, done) {
+				var vm = this
+				Velocity(el,
+					{opacity: 1},
+					{
+						duration: this.fadeInDuration,
+						complete: function () {
+							done()
+							if (!vm.stop) vm.show = false
+						}
+					}
+				)
+			},
+			leave: function (el, done) {
+				var vm = this
+				Velocity(el,
+					{opacity: 0},
+					{
+						duration: this.fadeOutDuration,
+						complete: function () {
+							done()
+							vm.show = true
+						}
+					}
+				)
+			}
+		}
+	})
+</script>
+<style>
+    /* Example 1 */
+    .slide-fade-enter-active {
+        transition: all 0.3s ease;
+    }
+
+    .slide-fade-leave-active {
+        transition: all 0.8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter, .slide-fade-leave-to
+        /* .slide-fade-leave-active below version 2.1.8 */
+    {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+
+    /*---------------------------------------------*/
+    /* Example 2 */
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+
+    .bounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /*---------------------------------------------*/
+    /* Example 5 */
+    .component-fade-enter-active, .component-fade-leave-active {
+        transition: opacity .3s ease;
+    }
+
+    .component-fade-enter, .component-fade-leave-to
+        /* .component-fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
+
+    /*---------------------------------------------*/
+    /* Example 6 */
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+
+    .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    /*---------------------------------------------*/
+    /* Example 7 */
+    .flip-list-move {
+        transition: transform 1s;
+    }
+</style>
+</html>
