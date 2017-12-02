@@ -19,13 +19,18 @@
         <div class="col-sm-12">
             <div id="example-1">
                 <h1>Example 1- CSS Transition</h1>
+                <ol>
+                    <li>CSS로 주기.</li>
+                </ol>
                 <button
                         class="btn btn-primary"
                         @click="show = !show"
                 >
                     Toggle render
                 </button>
-                <transition name="slide-fade">
+                <transition
+                        name="slide-fade"
+                >
                     <h2 v-if="show">hello</h2>
                 </transition>
             </div>
@@ -36,6 +41,9 @@
         <div class="col-sm-12">
             <div id="example-2">
                 <h1>Example 2 - CSS Animation</h1>
+                <ol>
+                    <li>재사용가능한 @KeyFrame CSS로 주기.</li>
+                </ol>
                 <button class="btn btn-primary"
                         @click="show = !show"
                 >
@@ -54,6 +62,11 @@
         <div class="col-sm-12">
             <div id="example-3">
                 <h1>Example 3 - Animate CSS - Overwrite - Appear</h1>
+                <ol>
+                    <li>Animate CSS</li>
+                    <li>Transition에 해당 기능 넣기.</li>
+                    <li>시작시 사용되는 Appear</li>
+                </ol>
                 <button
                         class="btn btn-primary"
                         @click="show = !show"
@@ -76,6 +89,10 @@
         <div class="col-sm-12">
             <div id="example-4">
                 <h1>Example 4 - JavaScript Hook - Velocity</h1>
+                <ol>
+                    <li>JavaScript로 주기 (Velocity)</li>
+                    <li>Done을 줘야함</li>
+                </ol>
                 <button class="btn btn-primary"
                         @click="show = !show"
                         a>
@@ -105,6 +122,10 @@
         <div class="col-sm-12">
             <div id="example-5">
                 <h1>Example 5 - transition-components-demo</h1>
+                <ol>
+                    <li>여러 Component에 Animation</li>
+                    <li>in-out: 처음에는 새로운 엘리먼트가 트랜지션되고, 완료되면 현재 엘리먼트가 트랜지션됩니다.</li>
+                </ol>
                 <label>A
                     <input
                             type="radio"
@@ -134,6 +155,11 @@
         <div class="col-sm-12">
             <div id="example-6">
                 <h1>Example 6 - List Transition</h1>
+                <ol>
+                    <li>List Css Animation using for</li>
+                    <li>Transition Group</li>
+                    <li>이 기능을 사용하기 위해 알아야 할 유일한 새로운 개념은 아이템이 위치를 바꿀 때 추가되는 v-move 클래스를 추가하는 것입니다.</li>
+                </ol>
                 <button
                         class="btn btn-primary"
                         @click="add"
@@ -146,7 +172,10 @@
                 >
                     Remove
                 </button>
-                <transition-group name="list" tag="h5">
+                <transition-group
+                        name="list"
+                        tag="h5"
+                >
                         <span
                                 v-for="item in items"
                                 :key="item"
@@ -207,6 +236,45 @@
                         v-else
                         @click="stop = true"
                 >Stop it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="simple-css">
+                <transition
+                        name="simple-css"
+                        enter-active-class="animated rollIn"
+                        leave-active-class="animated rollOut"
+                >
+                    <h2 v-if="show">Simple CSS</h2>
+                </transition>
+
+                <button class="btn btn-primary"
+                        @click="show = !show"
+                        a>
+                    Toggle
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="simple2-css">
+                <transition
+                        name="simple2-css"
+                >
+                    <h2 v-if="show">Simple2 CSS</h2>
+                </transition>
+
+                <button class="btn btn-primary"
+                        @click="show = !show"
+                        a>
+                    Toggle
                 </button>
             </div>
         </div>
@@ -336,7 +404,7 @@
 			},
 			remove: function () {
 				this.items.splice(this.randomIndex(), 1)
-			},
+			}
 		}
 	})
 
@@ -396,6 +464,20 @@
 			}
 		}
 	})
+
+	new Vue({
+		el: '#simple-css',
+		data: {
+			show: true
+		}
+	})
+
+	new Vue({
+		el: '#simple2-css',
+		data: {
+			show: true
+		}
+	})
 </script>
 <style>
     /* Example 1 */
@@ -426,13 +508,13 @@
 
     @keyframes bounce-in {
         0% {
-            transform: scale(0);
+            transform: translateY(10px);
         }
         50% {
-            transform: scale(1.5);
+            transform: translateY(20px);
         }
         100% {
-            transform: scale(1);
+            transform: translateY(30px);
         }
     }
 
@@ -469,6 +551,43 @@
     /* Example 7 */
     .flip-list-move {
         transition: transform 1s;
+    }
+
+    /*---------------------------------------------*/
+    /*Simple2 CSS */
+    .simple2-css-enter-active {
+        animation: mymove 2s;
+    }
+
+    .simple2-css-leave-active {
+        animation: mymove 2s reverse;
+    }
+
+/*    @keyframes mymove {
+        0% {
+            font-size: 14px;
+        }
+        25% {
+            font-size: 16px;
+        }
+        50% {
+            font-size: 18px;
+        }
+        75% {
+            font-size: 22px;
+        }
+        100% {
+            font-size: 26px;
+        }
+    }*/
+
+    @keyframes mymove {
+        from {
+            font-size: 10px;
+        }
+        to {
+            font-size: 26px;
+        }
     }
 </style>
 </html>
