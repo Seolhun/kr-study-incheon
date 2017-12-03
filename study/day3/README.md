@@ -1,9 +1,9 @@
-# Vue Study In Incheon - Day 1.
+# Vue Study In Incheon - Day 3.
 
 - Author : [SeolHun](https://github.com/Seolhun)
 - IDE : SublimeText3 or Webstorm
 - Version : Vue 2.5.3
-- Started Date : 2017.11.09
+- Started Date : 2017.12.03
 ---
 #### Presentation
 - Transitions & Animation
