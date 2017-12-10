@@ -40,6 +40,8 @@ Redux의 저자인 Dan Abramov의 좋은 인용.
 Flux 라이브러리는 안경과 같습니다. 필요할 때 알아볼 수 있습니다.
 ```
 - 개인적인 생각으로는 대부분의 어플리케이션에서 vuex 를 사용하는 편이 더 쉽게 개발/유지보수 가능할듯. 
+- 참고링크 : https://github.com/stepanowon/vuejs_book/blob/master/vuex/about_vuex.md
+- ​
 
 ## 설치 
 - CDN - vue 뒤에 추가
