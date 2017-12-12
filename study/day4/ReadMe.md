@@ -7,8 +7,8 @@ vue를 위한 flux 구현체 (react 의 redux 같은)
 <img src="https://vuex.vuejs.org/kr/images/vuex.png" width="500px"/> 
 
 - 컴포넌트는 상태를 데이터로 바인딩하여 렌더링을 한다.
-- 상태가 변하면 Dispatch 로 Actions 를 실행하여 상태를 변경(commit) 한다.
-- mutations 한다.
+- 상태를 변경하고자 하면 Commit 으로 mutations 시킨다. (동기만가능)
+- 상태를 변경할때 비동기적인 콜이 필요하다면 Dispatch 로 Actions 를 실행하여 Callback(혹은 promise) 에서 상태를 commit 한다. (비동기가능)
 - 새로운 상태는 컴포넌트에 업데이트 된다.
 - 이렇게되면 상태에 대한 추적이 가능한 기록이 남을 수 있어 개발에 용이하다. 
 - (개인적인 생각으로) 이벤트소싱, CQRS 와 느낌적으로 비슷하다. 
