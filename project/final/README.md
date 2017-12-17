@@ -1,6 +1,6 @@
 # Final Vue Study Project
 
-- Author : 백지훈, 이지희, 설훈
+- Author : 백지훈, 이지희, 임슬기, 설훈
 - Date : 2017.12.17
 ---
 
