@@ -15,14 +15,14 @@
 
 #### 2. Component
 - 홈(Main)
-- 사간(Time)
+- 시간(Time)
 - 검색기능(Google Search)
 - 이미지(Image) - Get API
-
+---
 - 명언(Lesson) - Get API
 - 날씨(Weather) - Get API
 - 설정(Configuration)
 	- 사용/비사용 설정
 	- 사진 바꾸기
-
+---
 - 할 일 관리(To Do List)
