@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/blis-table/src/main.js" />
+        <item url="file://$PROJECT_DIR$/dist/blis-table/src/store/index.js" />
+        <item url="file://$PROJECT_DIR$/dist/blis-table/src/store/modules/Weather.js" />
+        <item url="file://$PROJECT_DIR$/dist/blis-table/src/store/store.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/blis-table/src/main.js" />
+      <root url="file://$PROJECT_DIR$/dist/blis-table/src/store/index.js" />
+      <root url="file://$PROJECT_DIR$/dist/blis-table/src/store/modules/Weather.js" />
+      <root url="file://$PROJECT_DIR$/dist/blis-table/src/store/store.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
